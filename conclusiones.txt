@@ -1,0 +1,18 @@
+Conclusiones generales:
+    Para ambos ejercicios me tomé la libertad de agregar una capa más de lógica con el preprocesador de cucumber, en los cuales se puede inspeccionar los archivos .feature escritos en formato gherkin. Todo para darle un enfoque BDD. Agregado a que los archivos .feature al estar en español y son entendibles para personas de negocios suman valor de documentación.
+    
+Ejercicio e2e - opción 1:
+    Para el primer ejercicio utilicé un esquema de escenario el cual permite ir agregando datos de prueba dinámicamente. También se utilizó el enfoque POM (Page - Object - Model) para mapear los distintos elementos de la página como también las distintas acciones.
+    El objetivo de que mapee así los elementos y las acciones es para aportar escalabilidad al proyecto de automatización.
+    En cuanto a la web:
+        - Me encontré con un formulario de compra con pocas reglas de validaciones en sus inputs, algo que es poco habitual y mala práctica.
+        - Me encontré con que el formulario ejecuta una petición 'deletecart' la cual elimina el carro. No registra en ningún lado los datos que enviamos.
+        - El campo "Credit Card" muestra el input del usuario, en vez de esconderlo como se suele aplicar con inputs de información sensible.
+        - Algunas cuestiones de diseño UX/UI como que el footer en la descripción del producto no esté situado al fin de la pantalla, que al agregar un producto al carro no pueda continuar a la compra directamente sin tener que dirigirme al carro y emitir la orden de compra.
+        - En una ocasión me encontré con una anomalia del sistema en la cual quedaron unos productos sin aparecer en el home. 
+
+Ejercicio API - opción 1:
+    Para el ejercicio de API utilicé solamente los escenarios pedidos en los cuales elegí manejarme con el comando cy.request en vez de realizarlo por interfaz ya que el ejercicio pedía consumir los servicios directamente. 
+    Se implementó un comando custom cy.generarNombreAleatorio ubicado en cypress\support\commands.js el cual recibirá un nombre de usuario y devolverá el mismo con un caracter aleatorio y un numero aleatorio de 4 cifras. 
+    Aquí es donde me llevé mayor sorpresa ya que me encontré con casos donde el endpoint devuelve un 200 cuando debería devolver un estado de error según corresponda (400, 403 por ejemplo) a su vez también me encontré con que tanto el login como el signup no encriptan las credenciales del usuario por lo cual son vulnerables. También las respuestas de las peticiones si bien hice validaciones con respecto a lo que devuelven, asumiendo que es el comportamiento esperado, son strings vacíos.
+    
